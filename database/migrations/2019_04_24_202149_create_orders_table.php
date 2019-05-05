@@ -13,8 +13,8 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('cascade');
             $table->date('date');
-            $table->integer('total_brutto');
-            $table->integer('total_netto');
+            $table->integer('price_brutto');
+            $table->integer('price_netto');
             $table->timestamps();
         });
     }

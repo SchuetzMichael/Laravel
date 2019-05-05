@@ -8,17 +8,20 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 class OrderController extends Controller {
     public function index(){
-        $order = Order::with(['books', 'stati', 'user'])->orderBy('user_id')->orderBy('created_at', 'DESC')->get();
+        $order = Order::with(['books', 'status', 'user'])->orderBy('user_id')->orderBy('created_at', 'DESC')->get();
         return $order;
     }
+
+    public function getSingleOrder(int $id){
+        $order = Order::where('id', $id)->with(['books', 'status', 'user'])->first();
+        return $order;
+    }
+
     public function getAllOrdersByUser($user_id){
-        $order = Order::where('user_id', $user_id)->orderBy('created_at', 'desc')->with(['books', 'stati', 'user'])->get();
+        $order = Order::where('user_id', $user_id)->orderBy('created_at', 'desc')->with(['books', 'status', 'user'])->get();
         return $order;
     }
-    public function getOrder(int $id){
-        $order = Order::where('id', $id)->with(['books', 'stati', 'user'])->first();
-        return $order;
-    }
+
     public function saveOrder(Request $request) : JsonResponse  {
         $request = $this->parseRequest($request);
         DB::beginTransaction();

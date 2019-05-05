@@ -10,12 +10,13 @@ class User extends Authenticatable implements JWTSubject
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password', 'isAdmin', 'firstname', 'lastname', 'street', 'street_number', 'city', 'zip_code', 'country'
+        'name', 'email', 'password', 'isAdmin', 'firstname', 'lastname', 'street', 'street_number', 'city', 'plz', 'country'
     ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
+
     public function books() : HasMany {
         return $this->hasMany('Book::class');
     }

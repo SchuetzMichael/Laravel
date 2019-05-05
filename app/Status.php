@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Status extends Model
 {
     protected $fillable = ['status', 'comment', 'order_id'];
+
     public function order() : BelongsTo {
         return $this->belongsTo(Order::class);
     }

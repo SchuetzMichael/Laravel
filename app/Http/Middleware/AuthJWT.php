@@ -15,7 +15,6 @@ class AuthJWT
     public function handle($request, Closure $next)
     {
         try {
-//            $user = JWTAuth::toUser($request->input('token'));
             if(!$user = JWTAuth::parseToken()->authenticate()){
                 return response()->json(['error' => 'Invalid token']);
             }
@@ -31,7 +30,6 @@ class AuthJWT
                 return response()->json(['error'=>'Authentication error.']);
             }
         }
-//        wenn ein gültiger User da ist, dann schickt er diesen an den nächsten REST call weiter
         return $next($request);
     }
 }
